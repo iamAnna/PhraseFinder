@@ -23,30 +23,38 @@ Example output:
     
     
 #### My Initial Approach
-1. Find all repeated phrases
-    * Use HashMap with < String, Integer > key-value pairs (key = phrase, value = !count ? 1 : count++ )
+1. Separate text into sentences
+1. Iterate through each sentence
+    1. Word count of the sentence >= the minimum? If yes, continue.  If not, go to next sentence iteration.
+1. Remove all punctuation
+1. Map phrases from the sentence using a HashMap with < String, Integer > key-value pairs (key = phrase, value = !count ? 1 : count++ )
+    * increment phrase count if it already exists
 1. Validate each phrase
     1. Word count within min / max? If no, remove
     1. Phrase count >= 2
     1. Is it a subset of another?  If yes, remove
-    1. Does the phrase span more than one sentence?  If yes, remove
     
 #### Potential Problems
-* How to determine a sentence ending / sentence beginning?
+* **Question**: How to determine a sentence ending / sentence beginning?
     * REGEX for period (.), exclamation point (!), question mark (?)
         * Cons:
             1. Poor performance
             1. Delicate and easy to break
             1. Tons edge cases to consider (encoding type, see quote example below, etc)
             1. Difficult to read, debug, and maintain (see _b_ above)
-    * However what if there is a block quote or a quote within a quote:
-        quote within quote example: 
+    * However what if there is a block quote or a quote within a quote: 
 
              When I was there the waiter said, "Well let me tell ya, my boss was givin' me the business and 
              hollering, 'Two dollar bills aren't real! Who in their right mind would think that?!?!', and 
              it took all my power not to bust up laughing."
     * Looking at the example above, what if "`think that?!?!', and it`" is a repeated phrase? It's technically part of the same sentence, but contains the sentence ending delimiters that were listed previously
-
+* **Answer**: Java 8's [BreakIterator](https://docs.oracle.com/javase/8/docs/api/index.html?java/text/BreakIterator.html).getSentenceInstance()
+    * Note:, a sentence containing a quote will break the encompassing sentence into 2 or more separate strings.
+        * I said to Mable, "That's too bad!" and I think she believed it.
+            * I said to Mable,
+            * "That's too bad."
+            * and I think she believed it.
+        
 
 #### Future Features
 * Add arguments (with defaults and checks) to let user modify the phrase word min and max

@@ -1,5 +1,13 @@
 # Phrase Finder & Counter
 
+This project is based on a take-home problem I was assigned and wanted to keep working on.
+
+I intend to add tests and improve documentation.
+
+Any and all grammatical errors are mine and mine alone.
+
+###Instructions
+
 Given a string representing a document, write a function which returns the top 10 most frequent repeated phrases. 
 * A phrase is a stretch of three to ten consecutive words 
     * cannot span sentences
@@ -23,16 +31,16 @@ Example output:
     
     
 #### My Initial Approach
-1. Separate text into sentences
-1. Iterate through each sentence
-    1. Word count of the sentence >= the minimum? If yes, continue.  If not, go to next sentence iteration.
+1. Separate text into sentences and iterate through each
+1. Word count of current sentence >= the minimum? If yes, continue.  If not, skip current sentence and continue iteration.
 1. Remove all punctuation
-1. Map phrases from the sentence using a HashMap with < String, Integer > key-value pairs (key = phrase, value = !count ? 1 : count++ )
+1. Map phrases from current sentence using a HashMap with < String, Integer > key-value pairs (key = phrase, value = !count ? 1 : count++ )
     * increment phrase count if it already exists
 1. Validate each phrase
     1. Word count within min / max? If no, remove
-    1. Phrase count >= 2
-    1. Is it a subset of another?  If yes, remove
+    1. Phrase count >= 2.  If no, remove
+1. Sort in descending order, top 10
+    1. _(implement later) Is it a subset of another?  If yes, remove_
     
 #### Potential Problems
 * **Question**: How to determine a sentence ending / sentence beginning?
@@ -49,17 +57,19 @@ Example output:
              it took all my power not to bust up laughing."
     * Looking at the example above, what if "`think that?!?!', and it`" is a repeated phrase? It's technically part of the same sentence, but contains the sentence ending delimiters that were listed previously
 * **Answer**: Java 8's [BreakIterator](https://docs.oracle.com/javase/8/docs/api/index.html?java/text/BreakIterator.html).getSentenceInstance()
-    * Note:, a sentence containing a quote will break the encompassing sentence into 2 or more separate strings.
-        * I said to Mable, "That's too bad!" and I think she believed it.
-            * I said to Mable,
-            * "That's too bad."
-            * and I think she believed it.
+    * Note: a sentence containing a quote will break the encompassing sentence into 2 or more separate strings.
+    For example: `I said to Mable, "That's too bad!" and I think she believed it.` will break it into three sentences:
+    
+            I said to Mable,
+            "That's too bad."
+            and I think she believed it.
         
 
 #### Future Features
-* Add arguments (with defaults and checks) to let user modify the phrase word min and max
-    * Defaults:  min >= 3, max <= 10
-    * Check: confirm min <= max
+* Add arguments (with defaults and checks) to let user modify the phrase word min and max as well as number of phrases to return
+    * Defaults:  min >= 3, max <= 10, total number of phrases = 10
+    * Check: confirm min <= max, total number of phrases > 0
+    
 * Output: include count with phrase, perhaps as map entries
 * Make input more flexible and realistic - not just a String
     * Eventually allow different file types / file upload

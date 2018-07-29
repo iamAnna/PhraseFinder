@@ -6,7 +6,7 @@ I intend to add tests and improve documentation.
 
 Any and all grammatical errors are mine and mine alone.
 
-###Instructions
+### Instructions
 
 Given a string representing a document, write a function which returns the top 10 most frequent repeated phrases. 
 * A phrase is a stretch of three to ten consecutive words 

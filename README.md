@@ -39,8 +39,10 @@ Example output:
 1. Validate each phrase
     1. Word count within min / max? If no, remove
     1. Phrase count >= 2.  If no, remove
-1. Sort in descending order, top 10
-    1. _(implement later) Is it a subset of another?  If yes, remove_
+1. Sort in descending order and check the top 10 against all other phrases
+    1. Are any of the top 10 phrases a subset of another?  If yes, remove
+        * confirm all new phrases that bubble up through the removal process
+    1. Return top 10
     
 #### Potential Problems
 * **Question**: How to determine a sentence ending / sentence beginning?
@@ -56,7 +58,7 @@ Example output:
              hollering, 'Two dollar bills aren't real! Who in their right mind would think that?!?!', and 
              it took all my power not to bust up laughing."
     * Looking at the example above, what if "`think that?!?!', and it`" is a repeated phrase? It's technically part of the same sentence, but contains the sentence ending delimiters that were listed previously
-* **Answer**: Java 8's [BreakIterator](https://docs.oracle.com/javase/8/docs/api/index.html?java/text/BreakIterator.html).getSentenceInstance()
+* **Answer**: Java's [BreakIterator](https://docs.oracle.com/javase/8/docs/api/index.html?java/text/BreakIterator.html).getSentenceInstance()
     * Note: a sentence containing a quote will break the encompassing sentence into 2 or more separate strings.
     For example: `I said to Mable, "That's too bad!" and I think she believed it.` will break it into three sentences:
     
@@ -73,4 +75,6 @@ Example output:
 * Output: include count with phrase, perhaps as map entries
 * Make input more flexible and realistic - not just a String
     * Eventually allow different file types / file upload
+    
+* Try same problem in JavaScript, Go, etc.
 

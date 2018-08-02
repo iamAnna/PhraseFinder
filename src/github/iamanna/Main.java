@@ -69,7 +69,6 @@ public class Main {
         LinkedHashMap<String, Integer> sortedByPhraseSize = phraseCountMap.entrySet()
                 .stream()
                 .filter(map -> map.getValue()>1)
-//                .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
                 .sorted(Map.Entry.comparingByKey(Comparator.comparingInt(String::length)))
                 .collect(Collectors.toMap(Map.Entry::getKey,
                         Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));

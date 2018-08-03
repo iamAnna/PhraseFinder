@@ -33,7 +33,7 @@ Example output:
 * Add larger range of Strings to test with
     
 #### My Initial Approach
-1. Separate text into sentences with REGEX and iterate through each
+1. Separate text into sentences and iterate through each
 1. Word count of current sentence >= the minimum? If yes, continue.  If not, skip current sentence and continue iteration.
 1. Remove all punctuation
 1. Map phrases from current sentence using a HashMap with < String, Integer > key-value pairs (key = phrase, value = !count ? 1 : count++ )
@@ -48,14 +48,13 @@ Example output:
     
 #### Potential Problems
 * **Question**: How to determine a sentence ending / sentence beginning?
-    * REGEX for period (.), exclamation point (!), question mark (?)
+    * REGEX - was used in my first attempt - to look for period (.), exclamation point (!), question mark (?)
         * Cons:
             1. Poor performance
             1. Delicate and easy to break
             1. Tons edge cases to consider (encoding type, see quote example below, etc)
             1. Difficult to read, debug, and maintain (see _b_ above)
-    * However what if there is a block quote or a quote within a quote: 
-
+    * Also, what if there is a block quote or a quote within a quote: 
              When I was there the waiter said, "Well let me tell ya, my boss was givin' me the business and 
              hollering, 'Two dollar bills aren't real! Who in their right mind would think that?!?!', and 
              it took all my power not to bust up laughing."

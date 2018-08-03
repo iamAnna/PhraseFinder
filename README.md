@@ -2,8 +2,6 @@
 
 This project is based on a take-home problem I was assigned and wanted to keep working on.
 
-I intend to add tests and improve documentation.
-
 Any and all grammatical errors are mine and mine alone.
 
 ### Instructions
@@ -29,9 +27,13 @@ Example output:
 
     ['the lazy dog', 'the quick brown fox jumped over']
     
+#### Work Left to Do
+* Add arguments in Main class (see Future Features below)
+* Add tests for `buildFrequentPhraseMap` method in the Main class **AND / OR** break into smaller methods and relocate to PhraseUtils class
+* Add larger range of Strings to test with
     
 #### My Initial Approach
-1. Separate text into sentences and iterate through each
+1. Separate text into sentences with REGEX and iterate through each
 1. Word count of current sentence >= the minimum? If yes, continue.  If not, skip current sentence and continue iteration.
 1. Remove all punctuation
 1. Map phrases from current sentence using a HashMap with < String, Integer > key-value pairs (key = phrase, value = !count ? 1 : count++ )
